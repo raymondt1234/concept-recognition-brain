@@ -1,0 +1,12 @@
+.Logo {
+    background: linear-gradient(75deg, #FF5EDF 0%, #04C8DE 100%);
+    display: inline-block;
+}
+
+.flexbox {
+    display: flex;
+}
+
+img {
+    margin: 25px;
+}

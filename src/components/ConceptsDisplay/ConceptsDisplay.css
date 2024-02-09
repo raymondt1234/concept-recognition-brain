@@ -1,0 +1,15 @@
+.displayDiv {
+    color:azure;
+    display: inline-block;
+    width: 20%;
+}
+
+ol {
+    font-size: larger;
+    text-align: left;
+}
+
+ol > li {
+    display: flex;
+    justify-content:space-between
+}
