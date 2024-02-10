@@ -8,7 +8,6 @@ import ConceptsDisplay from "./components/ConceptsDisplay/ConceptsDisplay";
 import ParticlesBg from "particles-bg"
 import "./App.css";
 
-
 class App extends Component {
   constructor() {
     super();
@@ -71,6 +70,11 @@ class App extends Component {
 
 
   render() {
+    if (this.state.concepts > 0) {
+      document.getElementById("conceptHeading").setAttribute("hidden", false);
+      console.log();
+    }
+
     return (
       <div className="App">
         <ParticlesBg className="particles" type="circle" bg={true} />

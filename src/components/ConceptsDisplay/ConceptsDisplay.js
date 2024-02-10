@@ -1,20 +1,19 @@
 import React from "react";
 import "./ConceptsDisplay.css";
+import Concept from "../Concept/Concept";
 
 const ConceptsDisplay = ({ concepts }) => {
 
-    const formatAsPercent = (number) => {
-        return `${parseFloat(number * 100).toFixed(1)}%`;
-    }
-
     const listConcepts = concepts.map(concept => {
-        return <li key={concept.id}><span>{concept.name}</span> <span>{formatAsPercent(concept.value)}</span></li>
+        return <Concept concept={concept} />
     });
-
+    
 
     return (
         <div className="displayDiv">
-            <h2>Concepts in the Image</h2>
+            <h2 id="conceptHeading" hidden={concepts.length > 0 ? false : true}>
+                Concepts found in the Image
+            </h2>
             <ol>
                 {listConcepts}
             </ol>
