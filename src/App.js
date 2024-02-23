@@ -5,6 +5,8 @@ import Rank from "./components/Rank/Rank";
 import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
 import ImageDisplay from "./components/ImageDisplay/ImageDisplay";
 import ConceptsDisplay from "./components/ConceptsDisplay/ConceptsDisplay";
+import SignIn from "./components/SignIn/SignIn";
+import Register from "./components/Register/Register";
 import ParticlesBg from "particles-bg"
 import "./App.css";
 
@@ -15,6 +17,8 @@ class App extends Component {
       input: "",
       imageURL: "",
       concepts: [],
+      route: "signin",
+      isSignedIn: false
     }
   }
 
@@ -68,25 +72,39 @@ class App extends Component {
       .catch(error => console.log("error", error));
   }
 
+  onRouteChange = (route) => {
+    if (route === "signout") {
+      this.setState({ isSignedIn: false })
+    } else if (route === "home") {
+      this.setState({ isSignedIn: true })
+    }
+    this.setState({ route: route });
+  }
 
   render() {
-    if (this.state.concepts > 0) {
-      document.getElementById("conceptHeading").setAttribute("hidden", false);
-      console.log();
-    }
-
+    const { route, imageURL, concepts, isSignedIn } = this.state;
     return (
       <div className="App">
         <ParticlesBg className="particles" type="circle" bg={true} />
-        <Navigation />
-        <Logo />
-        <Rank />
-        <ImageLinkForm
-          onInputChange={this.onInputChange}
-          onButtonSubmit={this.onButtonSubmit}
-        />
-        <ImageDisplay imageURL={this.state.imageURL} />
-        <ConceptsDisplay concepts={this.state.concepts} />
+        <Navigation onRouteChange={this.onRouteChange} isSignedIn={isSignedIn} />
+        {
+          route === "home"
+            ? <div>
+              <Logo />
+              <Rank />
+              <ImageLinkForm
+                onInputChange={this.onInputChange}
+                onButtonSubmit={this.onButtonSubmit}
+              />
+              <ImageDisplay imageURL={imageURL} />
+              <ConceptsDisplay concepts={concepts} />
+            </div>
+            : (
+              this.state.route === "signin"
+                ? <SignIn onRouteChange={this.onRouteChange} />
+                : <Register onRouteChange={this.onRouteChange} />
+            )
+        }
       </div>
     );
   }
